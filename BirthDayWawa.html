@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Countdown to Birthday</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f6d365, #fda085);
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #countdownContainer, #birthdayMessage {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #countdownContainer div {
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        #countdownContainer span {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #birthdayMessage {
+            display: none;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        /* Balloon CSS */
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 50px;
+            height: 70px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: float 5s linear infinite;
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background-color: #fff;
+            transform: translateX(-50%);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            100% {
+                transform: translateX(calc(-50px + 100px * var(--rand-x))) translateY(-120vh);
+            }
+        }
+    </style>
+    <script>
+        function countdown() {
+            const targetDate = new Date("January 5, 2025 00:00:00").getTime();
+            const timer = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance <= 0) {
+                    clearInterval(timer);
+                    document.getElementById("countdownContainer").style.display = "none";
+                    document.getElementById("birthdayMessage").style.display = "block";
+                    releaseBalloons(); // Release balloons when countdown ends
+                } else {
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById("days").innerText = days;
+                    document.getElementById("hours").innerText = hours;
+                    document.getElementById("minutes").innerText = minutes;
+                    document.getElementById("seconds").innerText = seconds;
+                }
+            }, 1000);
+        }
+
+        function releaseBalloons() {
+            for (let i = 0; i < 30; i++) {
+                const balloon = document.createElement("div");
+                balloon.classList.add("balloon");
+                balloon.style.left = Math.random() * 100 + "vw";
+                balloon.style.setProperty("--rand-x", Math.random());
+                balloon.style.backgroundColor = getRandomColor();
+                document.body.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 5000); // Remove balloon after animation ends
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ["#FF5F6D", "#FFC371", "#85FFBD", "#D9A7C7", "#FECF6A"];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }        
+    </script>
+</head>
+<body onload="countdown()">
+    <form id="form1" runat="server">
+        <div id="countdownContainer">
+            <h1>Countdown to Wawa's Birthday!</h1>
+            <div>
+                <span id="days"></span> Days 
+                <span id="hours"></span> Hours 
+                <span id="minutes"></span> Minutes 
+                <span id="seconds"></span> Seconds
+            </div>
+        </div>
+
+        <div id="birthdayMessage">
+            <h1>Happy Birthday, Nazwa Frida!</h1>
+            <p>Today is the perfect day to celebrate all the beauty you bring into my life. 
+                <br>May every step you take be filled with happiness,
+                <br>will always be by your side to share every precious moment.</p>
+            <br>
+            <a class="fancy-button" href="WawaOnly.html">Get Started</a>
+        </div>
+    </form>
+    <style>
+      /* Button Get Started */
+        .fancy-button {
+            background: linear-gradient(90deg, #ff8a00, #da1b60);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+        }
+
+        .fancy-button:hover {
+            background: linear-gradient(90deg, #da1b60, #ff8a00);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .fancy-button:active {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+      /* Until Here */
+    </style>
+</body>
+</html>

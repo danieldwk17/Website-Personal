@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nazwa Frida Fauziyyah</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('Pictures/BGWw.png') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            color: #ff6f61;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-container button {
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #e6554f;
+        }
+
+        /* Style untuk modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .modal a {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #ff6f61;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Mencegah form submit default
+
+            const namaPacar = document.getElementById('namaPacar').value.toLowerCase();
+
+            if (namaPacar !== "daniel") {
+                alert("Isi nama pacar \"Daniel\".");
+                return false;
+            }
+
+            showBirthdayMessage();
+            return true;
+        }
+
+        function showBirthdayMessage() {
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modalContent');
+
+            const message = `🎉 Selamat Anda mendapat Voucher All Pembelian Sebesar Rp. 500.000 dari Daniel! 🎁\n\n` +
+                `🎂 Selamat Ulang Tahun Nazwa Frida Fauziyyah! \n` +
+                `✨ Semoga Panjang Umur, Sehat Selalu, Dilancarkan segala jalan hidupnya, serta dilancarkan rejekinya.\n\n` +
+                `🎊 Selamat 22 Tahun!!! 🎈`;
+
+            modalContent.innerHTML = message;
+
+            // Menambahkan link ke halaman voucher
+            const voucherLink = document.createElement('a');
+            voucherLink.href = 'https://drive.google.com/file/d/1RwYgZYzPfgqGtW13iKrhAMhZOprKN8du/view?usp=sharing';
+            voucherLink.target = '_blank';
+            voucherLink.textContent = 'Klik Disini Untuk Menonton!';
+            modalContent.appendChild(voucherLink);
+
+            // Menampilkan modal
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Form Doorprize</h2>
+        <form onsubmit="return validateForm(event);">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama" required>
+
+            <label for="tanggalLahir">Tanggal Lahir:</label>
+            <input type="date" id="tanggalLahir" name="tanggalLahir" required>
+
+            <label for="namaAyah">Nama Ayah:</label>
+            <input type="text" id="namaAyah" name="namaAyah" placeholder="Masukkan nama ayah" required>
+
+            <label for="namaIbu">Nama Ibu:</label>
+            <input type="text" id="namaIbu" name="namaIbu" placeholder="Masukkan nama ibu" required>
+
+            <label for="namaPacar">Nama Pacar:</label>
+            <input type="text" id="namaPacar" name="namaPacar" placeholder="Masukkan nama pacar" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Modal untuk menampilkan pesan -->
+    <div id="modal" class="modal" onclick="closeModal()">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <p>Loading...</p>
+        </div>
+    </div>
+</body>
+
+</html>
